@@ -210,7 +210,6 @@ class KIUT_dane:
 # Create an instance of the class
 try:
     kiut_dane_instance = KIUT_dane()
-    first_start = None
     # Call the function on the instance
     kiut_dane_instance.start_pobranie()
 
