@@ -9,6 +9,7 @@ from time import sleep
 import pyautogui
 import ctypes
 
+
 # TODO uodpornienie kursora w sytuacji jeżeli istnieje plik
 
 """
@@ -30,14 +31,15 @@ class KIUT_dane:
         self.czy_przekierowanie = False
         self.layers = []
         self.sieci = ['przewod_wodociagowy', 'przewod_kanalizacyjny', 'przewod_gazowy', 'przewod_elektroenergetyczny']
+        self.sieci = ['przewod_telekomunikacyjny']
         self.new_sieci = ['siec_wodociagowa', 'siec_kanalizacyjna', 'siec_gazowa', 'siec_elektroenergetyczna']
-
+        self.new_sieci = ['siec_telekomunikacja']
         self.start_pobranie()
 
     def success_message(self,title, text, style):
         return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-    def zapis_danych(self,n,i):
+    def zapis_danych(self, n, i):
         # Save the response content as a GeoTIFF file
         nazwa_pliku = f"obszar_{n}_{i}.tif"
 
@@ -58,8 +60,14 @@ class KIUT_dane:
                     print(f"Plik {i} posiada złe rozszerzenie.")
 
     def poruszanie_ekran(self,value,name):
-        pyautogui.moveTo(438, 64, duration=1)
-        pyautogui.click(438, 64)
+        if self.kod_powiatu == 1465:
+            pyautogui.moveTo(1581, 676, duration=1)
+            pyautogui.rightClick()
+            pyautogui.moveTo(1585, 713, duration=1)
+            pyautogui.leftClick()
+
+        pyautogui.moveTo(982, 60, duration=1)
+        pyautogui.click(982, 60)
 
         pyautogui.press("enter")
         with pyautogui.hold("ctrl"):
@@ -67,6 +75,7 @@ class KIUT_dane:
 
         pyautogui.typewrite(self.Output)
         pyautogui.moveTo(195,790, duration=1)
+
         pyautogui.click(195,790)
 
         with pyautogui.hold("ctrl"):
@@ -76,12 +85,14 @@ class KIUT_dane:
         pyautogui.moveTo(1148, 890, duration=1)
         pyautogui.click(1148, 890)
 
-
     def ponowne_pobranie(self,value,name):
-        print('Pobieranie: ', name,value.strip().replace("png","tiff"))
-
+        if self.kod_powiatu==1465:
+            print('Pobieranie: ', name, value.strip())
+            webbrowser.open(url=value.split(' ')[1].strip())
+        else:
+            print('Pobieranie: ', name,value.strip().replace("png","tiff"))
+            webbrowser.open(url=value.split(' ')[1].strip().replace("png", "tiff"))
         # Na przyszłość: [i for i in range(5)][0]
-        webbrowser.open(url=value.split(' ')[1].strip().replace("png","tiff"))
         sleep(3)
         self.poruszanie_ekran(value=value.split(' ')[0],name=name)
         sleep(1)
@@ -105,7 +116,11 @@ class KIUT_dane:
 
         if polecenie.url.count("png") >= 1:
             self.czy_przekierowanie = True
-            url_zapis = str(polecenie.url).replace("png", "tiff")
+
+            if self.kod_powiatu==1465:
+                url_zapis = str(polecenie.url)
+            else:
+                url_zapis = str(polecenie.url).replace("png", "tiff")
             file_linki.write(str(n) + ' ' + str(url_zapis) + "\n")
             print("Zapisany link: ", str(n) + ' ' + url_zapis)
         else:
@@ -114,6 +129,8 @@ class KIUT_dane:
 
         if polecenie.status_code == 200 and polecenie.url.count("png") == 0:
             self.zapis_danych(n,i)
+        if polecenie.status_code == 200 and polecenie.url.count("png") == 1 and self.kod_powiatu==1465:
+            self.zapis_danych(n, i)
         elif polecenie.url.count("png") > 0:
             pass
         else:
@@ -152,6 +169,7 @@ class KIUT_dane:
 
                                 for i in self.sieci:
                                     try:
+                                        sleep(2)
                                         self.sciaganie_danych(n,i,extent_total,file_linki)
 
                                     except fiona.errors.DriverError or fiona._err.CPLE_OpenFailedError as e:
@@ -175,7 +193,10 @@ class KIUT_dane:
                             print(f"Przekierowano: {self.czy_przekierowanie}")
                             with open(plik_txt, 'r') as file_linki:
                                 for row in file_linki.readlines():
-                                    name_siec = [name for name in self.new_sieci if name in row][0]
+                                    if len(self.new_sieci)>1:
+                                        name_siec = [name for name in self.new_sieci if name in row][0]
+                                    else:
+                                        name_siec = self.new_sieci[0]
                                     sleep(2)
                                     self.ponowne_pobranie(value=row,name=name_siec)
                                     pass
