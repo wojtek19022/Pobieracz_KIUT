@@ -43,9 +43,13 @@ class KIUT_dane:
         # Save the response content as a GeoTIFF file
         nazwa_pliku = f"obszar_{n}_{i}.tif"
 
-        with open(f"{os.path.join(self.Output, nazwa_pliku)}", "wb") as tiff_file:
-            tiff_file.write(self.polecenie.content)
-        print(f"GeoTIFF saved as obszar {n}_{i}.tif")
+        if self.polecenie.content is not None:
+            with open(f"{os.path.join(self.Output, nazwa_pliku)}", "wb") as tiff_file:
+                tiff_file.write(self.polecenie.content)
+            print(f"GeoTIFF saved as obszar {n}_{i}.tif")
+
+        else:
+            pass
 
     def przeszukanie_pliki(self):
         for i in os.listdir(self.Desktop):
