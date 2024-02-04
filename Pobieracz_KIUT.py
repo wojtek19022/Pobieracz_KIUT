@@ -14,7 +14,6 @@ from modules import (write_linki,files_searcher)
 """
 
 class KIUT_dane:
-
     def __init__(self):
         self.Desktop = None
         self.kod_powiatu = None
