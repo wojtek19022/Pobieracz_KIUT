@@ -14,7 +14,7 @@ jobs:
     steps:
       # ...
       - name: "linter"
-        uses: "github/super-linter@v1"
+        uses: "github/super-linter"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           title: "Code check"
