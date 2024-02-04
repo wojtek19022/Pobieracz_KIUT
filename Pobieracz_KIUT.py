@@ -1,7 +1,6 @@
 import os
 import ctypes
-
-from modules import (write_linki,files_searcher)
+from modules import write_linki,files_searcher
 
 # TODO uodpornienie kursora w sytuacji jeżeli istnieje plik
 # TODO uproszczenie logiki działania programu (zrobienie podziału na siatkę po zakresie na wejściu)
@@ -12,6 +11,7 @@ from modules import (write_linki,files_searcher)
     Wersja: 0.2.1
     Data publikacji: 26.11.2023 r.
 """
+
 
 class KIUT_dane:
 
@@ -25,10 +25,20 @@ class KIUT_dane:
         self.czy_przekierowanie = False
         self.workspace = os.getcwd()
         self.layers = []
-        self.sieci = ['przewod_wodociagowy', 'przewod_kanalizacyjny', 'przewod_gazowy', 'przewod_elektroenergetyczny']
-        self.sieci = ['przewod_telekomunikacyjny']
-        self.new_sieci = ['siec_wodociagowa', 'siec_kanalizacyjna', 'siec_gazowa', 'siec_elektroenergetyczna']
-        self.new_sieci = ['siec_telekomunikacja']
+        self.sieci = [
+            'przewod_wodociagowy',
+            'przewod_kanalizacyjny',
+            'przewod_gazowy',
+            'przewod_elektroenergetyczny',
+            'przewod_telekomunikacyjny'
+        ]
+        self.new_sieci = [
+            'siec_wodociagowa',
+            'siec_kanalizacyjna',
+            'siec_gazowa',
+            'siec_elektroenergetyczna',
+            'siec_telekomunikacja'
+            ]
         self.start_pobranie()
 
     def run(self):
