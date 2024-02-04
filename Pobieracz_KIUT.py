@@ -32,6 +32,7 @@ class KIUT_dane:
         self.start_pobranie()
 
     def run(self):
+        """Funkcja uruchamia wszsytkie podległe procesy do przetworzenia danych"""
         if os.path.exists(self.Output):
             files_searcher.przeszukanie_pliki(desktop=self.Desktop,
                                               layers=self.layers)
@@ -46,9 +47,13 @@ class KIUT_dane:
                                      output=self.Output)
 
     def success_message(self,title, text, style):
+        """Funkcja zwraca komentarz o sukcesie zakończenia procesu"""
         return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
     def start_pobranie(self):
+        """
+        Rozpoczęcie działania programu
+        """
         while type(self.Desktop) != str() or type(self.kod_powiatu) != int() or type(self.Output) != str():
 
             try:
@@ -74,6 +79,9 @@ class KIUT_dane:
         self.reset()
 
     def reset(self):
+        """
+        Funkcja resetująca wszystkie zmienne do domyślnych wartości
+        """
         self.Desktop = None
         self.kod_powiatu = None
         self.Output = None
@@ -81,8 +89,6 @@ class KIUT_dane:
         self.czy_przekierowanie = False
         self.layers.clear()
 
-# Jeżeli nie pracuję w innym programie to muszę zrobić taką instancję
-# Create an instance of the class
 try:
     kiut_dane_instance = KIUT_dane()
     # Call the function on the instance
