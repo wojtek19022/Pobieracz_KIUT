@@ -11,9 +11,6 @@ jobs:
     name: linter
     runs-on: ubuntu-latest
 
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     permissions:
       contents: read
       packages: read
@@ -21,5 +18,9 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
+        
       - name: super linter
         uses: github/super-linter@v3
+        env:
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
