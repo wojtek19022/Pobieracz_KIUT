@@ -1,19 +1,21 @@
 ---
-name: "linter"
+name: linter
 
 on:
   push:
     branches:
-      - "master"
+      - master
 
 jobs:
   linter:
-    name: "linter"
-    runs-on: "ubuntu-latest"
+    name: linter
+    runs-on: ubuntu-latest
 
     steps:
-      - name: "linter"
-        uses: "github/super-linter@latest"
+      - name: checkout repository
+        uses: actions/checkout@v3
+      - name: linter
+        uses: github/super-linter@latest
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          title: "Code check"
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          title: Code check
