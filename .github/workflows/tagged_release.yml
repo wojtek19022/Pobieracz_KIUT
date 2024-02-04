@@ -22,6 +22,5 @@ jobs:
           prerelease: false
           files: |
             modules/
-            *.py
-            *.md
-            requirements.txt
+            LICENCE
+            *.jar
