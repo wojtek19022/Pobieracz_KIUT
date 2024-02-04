@@ -1,1 +1,0 @@
-gdal_translate -a_ullr ulx uly lrx lry input.png output.tif
