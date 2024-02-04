@@ -1,0 +1,5 @@
+fiona==1.9.5
+shapely==2.0.2
+requests==2.31.0
+geopandas==0.14.3
+pyautogui==0.9.54

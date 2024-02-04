@@ -1,0 +1,7 @@
+----------
+Wersja 0.2
+- Dodano możliwość georeferencjonowania zdjęć
+
+----------
+Wersja 0.1
+- Pierwsze opublikowanie programu
