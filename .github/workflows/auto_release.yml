@@ -24,4 +24,5 @@ jobs:
             modules/
             *.py
             *.md
-            *.txt
+            changelog.txt
+            requirements.txt
