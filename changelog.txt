@@ -1,7 +1,8 @@
-----------
-Wersja 0.2
+# Changelog
+Changelog file
+
+## v0.2.1
 - Dodano możliwość georeferencjonowania zdjęć
 
-----------
-Wersja 0.1
+## v0.1
 - Pierwsze opublikowanie programu
