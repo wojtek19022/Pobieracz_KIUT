@@ -25,5 +25,5 @@ Kroki przed uruchomieniem narzędzia:
     <br>
     <b>Autor:</b> Wojciech Sołyga <br>
     <b>Data publikacji:</b> 26.11.2023 r.<br>
-    <!-- <b>Data aktualizacji:</b> 26.11.2023 r. -->
+    <b>Data aktualizacji:</b> 4.02.2024 r.
 </div>
