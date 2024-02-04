@@ -121,4 +121,3 @@ except KeyboardInterrupt:
     # Przekazanie tu jeżeli zabijemy proces programu
     print("\n---------------------------")
     print("Zatrzymano pracę programu")
-    
