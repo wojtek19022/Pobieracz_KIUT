@@ -6,13 +6,13 @@ on:
     branches:
       - master
 
-env:
-  repo_token: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   linter:
     name: linter
     runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     permissions:
       contents: read
@@ -23,5 +23,3 @@ jobs:
         uses: actions/checkout@v4
       - name: linter
         uses: github/super-linter@latest
-        with:
-          title: Code check
