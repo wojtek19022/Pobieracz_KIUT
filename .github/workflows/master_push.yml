@@ -17,12 +17,14 @@ jobs:
         run: |
           echo "done!"
 
-      - uses: "wojtek19022/Pobieracz_KIUT@<commit-SHA>"
+      - uses: "wojtek19022/Pobieracz_KIUT@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
-          prerelease: true
+          prerelease: false
           title: "Development Build"
           files: |
-            LICENSE.txt
-            *.jar
+            modules/
+            *.txt
+            *.md
+            *.py
