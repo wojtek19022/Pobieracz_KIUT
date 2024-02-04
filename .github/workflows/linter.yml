@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: "checkout"
-        uses: "actions/checkout@latest"
+        uses: "github/codescan@latest"
       - name: "linter"
         uses: "github/super-linter@latest"
         with:
