@@ -1,6 +1,9 @@
 # Changelog
 Changelog file
 
+## v0.2.2
+- Zmieniono strukturę kodu na anglojęzyczną
+
 ## v0.2.1
 - Dodano możliwość georeferencjonowania zdjęć
 

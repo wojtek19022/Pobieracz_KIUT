@@ -6,10 +6,10 @@ from requests.exceptions import HTTPError,RequestException
 
 from . import download_data,redownload,save_data
 
-def zapisz_linki(plik_txt,kod_powiatu,layers,desktop,sieci,new_sieci,przekierowanie,output):
+def save_link(txt_file,county_code,layers,desktop,networks,new_networks,redirection,output):
     coords = {}
 
-    with open(plik_txt, 'w+') as file_linki:
+    with open(txt_file, 'w+') as file_links:
         n = 1
         for i in layers:
             path_to_file = os.path.join(desktop, i)
@@ -40,15 +40,15 @@ def zapisz_linki(plik_txt,kod_powiatu,layers,desktop,sieci,new_sieci,przekierowa
                     coords.update({file_name: extent_total})
                     print("Extent: ", extent_total)
 
-                    for i in sieci:
+                    for i in networks:
                         try:
                             sleep(2)
-                            przekierowanie = download_data.sciaganie_danych(n=n,
+                            redirection = download_data.data_downloading(n=n,
                                                            i=i,
                                                            extent_total=extent_total,
-                                                           file_linki=file_linki,
-                                                           przekierowanie=przekierowanie,
-                                                           kod_powiatu=kod_powiatu,
+                                                           file_links=file_links,
+                                                           redirection=redirection,
+                                                           county_code=county_code,
                                                            output=output)
 
                         except fiona.errors.DriverError or fiona._err.CPLE_OpenFailedError as e:
@@ -56,7 +56,7 @@ def zapisz_linki(plik_txt,kod_powiatu,layers,desktop,sieci,new_sieci,przekierowa
 
                         except RequestException as e:
                             file_linki.write(
-                                str(f"{str(n)} https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaUzbrojeniaTerenu/{kod_powiatu}?LAYERS={i}&REQUEST=GetMap&SERVICE=WMS&FORMAT=image/tiff&STYLES=,,,&HEIGHT=2160&VERSION=1.1.1&SRS=EPSG:2180&WIDTH=3840&BBOX={extent_total}&TRANSPARENT=TRUE&EXCEPTIONS=application/vnd.ogc.se_xml") + "\n")
+                                str(f"{str(n)} https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaUzbrojeniaTerenu/{county_code}?LAYERS={i}&REQUEST=GetMap&SERVICE=WMS&FORMAT=image/tiff&STYLES=,,,&HEIGHT=2160&VERSION=1.1.1&SRS=EPSG:2180&WIDTH=3840&BBOX={extent_total}&TRANSPARENT=TRUE&EXCEPTIONS=application/vnd.ogc.se_xml") + "\n")
                             print(f"Request failed: {e}")
 
                         except HTTPError as e:
@@ -66,21 +66,23 @@ def zapisz_linki(plik_txt,kod_powiatu,layers,desktop,sieci,new_sieci,przekierowa
                             print(f"An unexpected error occurred: {e}")
 
             n += 1
-    file_linki.close()
+    file_links.close()
 
-    if przekierowanie is True:
-        print(f"Przekierowano: {przekierowanie}")
-        with open(plik_txt, 'r') as file_linki:
-            for row in file_linki.readlines():
-                if len(new_sieci) > 1:
-                    name_siec = [name for name in new_sieci if name in row][0]
+    if redirection is True:
+        print(f"Przekierowano: {redirection}")
+        with open(txt_file, 'r') as file_links:
+            for row in file_links.readlines():
+                if len(new_networks) > 1:
+                    name_network = [name for name in new_networks if name in row][0]
                 else:
-                    name_siec = new_sieci[0]
+                    name_network = new_networks[0]
                 sleep(2)
-                redownload.ponowne_pobranie(kod_powiatu=kod_powiatu,
-                                            output=output,
-                                            value=row,
-                                            name=name_siec)
-        file_linki.close()
+                redownload.download_again(
+                    county_code=county_code,
+                    output=output,
+                    value=row,
+                    name=name_network
+                )
+        file_links.close()
     else:
         print("Nie przekierowano łącza do serwera powiatowego pod wskazaną lokalizacją")
