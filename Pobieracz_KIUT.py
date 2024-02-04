@@ -1,7 +1,7 @@
 import os
 import ctypes
 
-from Skrypty import (write_linki,files_searcher)
+from modules import (write_linki,files_searcher)
 
 # TODO uodpornienie kursora w sytuacji jeżeli istnieje plik
 
