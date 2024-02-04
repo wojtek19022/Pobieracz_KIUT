@@ -17,7 +17,7 @@ jobs:
         run: |
           echo "done!"
 
-      - uses: "wojtek19022/Pobieracz_KIUT@latest"
+      - uses: "wojtek19022/Pobieracz_KIUT@<commit-SHA>"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
