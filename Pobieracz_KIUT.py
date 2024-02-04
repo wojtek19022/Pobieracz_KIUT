@@ -9,7 +9,7 @@ from modules import (write_linki,files_searcher)
 """
     Tytuł: Pobieracz KIUT®
     Autor: Wojciech Sołyga
-    Wersja: 0.2
+    Wersja: 0.2.1
     Data publikacji: 26.11.2023 r.
 """
 
