@@ -91,7 +91,7 @@ class KIUT_dane:
 
 try:
     kiut_dane_instance = KIUT_dane()
-    # Call the function on the instance
+    # inicjalizacja klasy
     kiut_dane_instance.start_pobranie()
 
 except KeyboardInterrupt:
