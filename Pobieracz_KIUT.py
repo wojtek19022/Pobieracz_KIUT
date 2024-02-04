@@ -1,6 +1,6 @@
 import os
 import ctypes
-from modules import write_linki,files_searcher
+from modules import write_linki, files_searcher
 
 # TODO uodpornienie kursora w sytuacji jeżeli istnieje plik
 # TODO uproszczenie logiki działania programu (zrobienie podziału na siatkę po zakresie na wejściu)
@@ -14,7 +14,6 @@ from modules import write_linki,files_searcher
 
 
 class KIUT_dane:
-
     def __init__(self):
         self.Desktop = None
         self.kod_powiatu = None
@@ -26,37 +25,38 @@ class KIUT_dane:
         self.workspace = os.getcwd()
         self.layers = []
         self.sieci = [
-            'przewod_wodociagowy',
-            'przewod_kanalizacyjny',
-            'przewod_gazowy',
-            'przewod_elektroenergetyczny',
-            'przewod_telekomunikacyjny'
+            "przewod_wodociagowy",
+            "przewod_kanalizacyjny",
+            "przewod_gazowy",
+            "przewod_elektroenergetyczny",
+            "przewod_telekomunikacyjny"
         ]
         self.new_sieci = [
-            'siec_wodociagowa',
-            'siec_kanalizacyjna',
-            'siec_gazowa',
-            'siec_elektroenergetyczna',
-            'siec_telekomunikacja'
+            "siec_wodociagowa",
+            "siec_kanalizacyjna",
+            "siec_gazowa",
+            "siec_elektroenergetyczna",
+            "siec_telekomunikacja"
             ]
         self.start_pobranie()
 
     def run(self):
         """Funkcja uruchamia wszsytkie podległe procesy do przetworzenia danych"""
         if os.path.exists(self.Output):
-            files_searcher.przeszukanie_pliki(desktop=self.Desktop,
-                                              layers=self.layers)
-            self.plik_txt = os.path.join(self.Output, 'linki_kiut.txt')
-            write_linki.zapisz_linki(plik_txt=self.plik_txt,
-                                     kod_powiatu=self.kod_powiatu,
-                                     layers=self.layers,
-                                     desktop=self.Desktop,
-                                     sieci=self.sieci,
-                                     new_sieci = self.new_sieci,
-                                     przekierowanie=self.czy_przekierowanie,
-                                     output=self.Output)
+            files_searcher.przeszukanie_pliki(desktop=self.Desktop, layers=self.layers)
+            self.plik_txt = os.path.join(self.Output, "linki_kiut.txt")
+            write_linki.zapisz_linki(
+                plik_txt=self.plik_txt,
+                kod_powiatu=self.kod_powiatu,
+                layers=self.layers,
+                desktop=self.Desktop,
+                sieci=self.sieci,
+                new_sieci = self.new_sieci,
+                przekierowanie=self.czy_przekierowanie,
+                output=self.Output
+            )
 
-    def success_message(self,title, text, style):
+    def success_message(self, title, text, style):
         """Funkcja zwraca komentarz o sukcesie zakończenia procesu"""
         return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
@@ -64,7 +64,11 @@ class KIUT_dane:
         """
         Rozpoczęcie działania programu
         """
-        while type(self.Desktop) != str() or type(self.kod_powiatu) != int() or type(self.Output) != str():
+        while (
+                type(self.Desktop) != str()
+                or type(self.kod_powiatu) != int()
+                or type(self.Output) != str()
+        ):
 
             try:
                 self.Desktop = str(input("-----------------------------------------------------"

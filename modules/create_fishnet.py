@@ -27,7 +27,7 @@ while y <= maxY:
                 (x, y + square_size),
                 (x + square_size, y + square_size),
                 (x + square_size, y),
-                (x, y)
+                (x, y),
             ]
         )
         geom_array.append(geom)
