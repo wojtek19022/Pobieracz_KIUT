@@ -29,15 +29,15 @@ class KIUT_dane:
             "przewod_kanalizacyjny",
             "przewod_gazowy",
             "przewod_elektroenergetyczny",
-            "przewod_telekomunikacyjny"
+            "przewod_telekomunikacyjny",
         ]
         self.new_sieci = [
             "siec_wodociagowa",
             "siec_kanalizacyjna",
             "siec_gazowa",
             "siec_elektroenergetyczna",
-            "siec_telekomunikacja"
-            ]
+            "siec_telekomunikacja",
+        ]
         self.start_pobranie()
 
     def run(self):
@@ -51,9 +51,9 @@ class KIUT_dane:
                 layers=self.layers,
                 desktop=self.Desktop,
                 sieci=self.sieci,
-                new_sieci = self.new_sieci,
+                new_sieci=self.new_sieci,
                 przekierowanie=self.czy_przekierowanie,
-                output=self.Output
+                output=self.Output,
             )
 
     def success_message(self, title, text, style):
@@ -65,18 +65,26 @@ class KIUT_dane:
         Rozpoczęcie działania programu
         """
         while (
-                type(self.Desktop) != str()
-                or type(self.kod_powiatu) != int()
-                or type(self.Output) != str()
+            type(self.Desktop) != str()
+            or type(self.kod_powiatu) != int()
+            or type(self.Output) != str()
         ):
 
             try:
-                self.Desktop = str(input("-----------------------------------------------------"
-                    "\nPodaj ścieżkę do folderu w którym są zapisane zakresy do opracowania \n"
-                                         "[1 zakres, to jedno zestawienie rastrów. Im mniejszy rozmiar kafla w metrach, tym dokładniejsze opracowanie!]: "))
+                self.Desktop = str(
+                    input(
+                        "-----------------------------------------------------"
+                        "\nPodaj ścieżkę do folderu w którym są zapisane zakresy do opracowania \n"
+                        "[1 zakres, to jedno zestawienie rastrów. Im mniejszy rozmiar kafla w metrach, tym dokładniejsze opracowanie!]: "
+                    )
+                )
                 if os.path.exists(self.Desktop):
                     self.kod_powiatu = int(input("Wprowadź kod miejscowości: "))
-                    self.Output = str(input("Podaj ścieżkę do folderu w którym zostaną zapisane wynikowe rastry po przetworzeniu: "))
+                    self.Output = str(
+                        input(
+                            "Podaj ścieżkę do folderu w którym zostaną zapisane wynikowe rastry po przetworzeniu: "
+                        )
+                    )
                     print("-----------------------------------------------------")
                     self.run()
                 else:
@@ -89,7 +97,7 @@ class KIUT_dane:
             except FileNotFoundError:
                 pass
 
-        self.success_message('Sukces', 'Ukończono pobieranie plików', 0)
+        self.success_message("Sukces", "Ukończono pobieranie plików", 0)
         self.reset()
 
     def reset(self):
@@ -103,6 +111,7 @@ class KIUT_dane:
         self.czy_przekierowanie = False
         self.layers.clear()
 
+
 try:
     kiut_dane_instance = KIUT_dane()
     # inicjalizacja klasy
@@ -112,3 +121,4 @@ except KeyboardInterrupt:
     # Przekazanie tu jeżeli zabijemy proces programu
     print("\n---------------------------")
     print("Zatrzymano pracę programu")
+    
