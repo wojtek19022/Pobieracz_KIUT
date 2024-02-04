@@ -1,6 +1,11 @@
 # Pobieracz_KIUT
 Wtyczka służy do pobierania za pomocą zapytania GetMap fragmentów sieci uzbrojenia terenu. Możliwe są braki możliwości pobrania danych z powodu blokad serwerowych.
 
+Przed uruchomieniem narzędzia, należy z poziomu command window przejść do ścieżki roboczej:
+```cd sciezka\robocza```
+Będąc w lokalizacji ścieżki roboczej, należy wpisać poniższą komendę w celu instalacji wymaganych bibliotek:
+```pip install -r requirements.txt```
+
 ## Aby pobrać fragmenty sieci uzbrojenia terenu należu:
 **1.** Należy prawidłowo pobrać dane:
 - Dane wymagają utworzenia pliku Shapefile lub Geopackage z zakresem do pobrania w formacie powierzchniowym,
