@@ -12,8 +12,6 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - name: "checkout"
-        uses: "github/codescan@latest"
       - name: "linter"
         uses: "github/super-linter@latest"
         with:
