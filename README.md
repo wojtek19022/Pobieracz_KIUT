@@ -3,6 +3,7 @@ Wtyczka służy do pobierania za pomocą zapytania GetMap fragmentów sieci uzbr
 
 Przed uruchomieniem narzędzia, należy z poziomu command window przejść do ścieżki roboczej:
 ```cd sciezka\robocza```
+
 Będąc w lokalizacji ścieżki roboczej, należy wpisać poniższą komendę w celu instalacji wymaganych bibliotek:
 ```pip install -r requirements.txt```
 
