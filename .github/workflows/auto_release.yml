@@ -1,0 +1,29 @@
+name: Auto Release Workflow
+
+on:
+  push:
+    branches:
+      - main  # Modify this to match your main branch name
+
+jobs:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}  # Use run number as a unique version identifier
+        release_name: Release ${{ github.run_number }}  # Modify this according to your release naming convention
+        body: |
+          Changes in this release:
+          - Add your release notes or change log here
+        draft: false
+        prerelease: false
