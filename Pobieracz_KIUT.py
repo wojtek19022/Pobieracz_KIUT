@@ -1,9 +1,10 @@
 import os
 import ctypes
 
-from Skrypty import (write_linki,files_searcher)
+from modules import (write_linki,files_searcher)
 
 # TODO uodpornienie kursora w sytuacji jeżeli istnieje plik
+# TODO uproszczenie logiki działania programu (zrobienie podziału na siatkę po zakresie na wejściu)
 
 """
     Tytuł: Pobieracz KIUT®
