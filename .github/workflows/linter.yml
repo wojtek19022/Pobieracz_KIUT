@@ -1,0 +1,20 @@
+---
+name: "linter"
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  pre-release:
+    name: "linter"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      # ...
+      - name: "linter"
+      - uses: "github/super-linter@v2"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          title: "Development Build"
