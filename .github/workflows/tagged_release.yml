@@ -16,7 +16,7 @@ jobs:
         run: |
           echo "done!"
 
-      - uses: "wojtek19022/Pobieracz_KIUT@latest"
+      - uses: "actions/Tagged Release@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
