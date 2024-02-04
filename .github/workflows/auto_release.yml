@@ -3,7 +3,7 @@ name: Auto Release Workflow
 on:
   push:
     branches:
-      - main  # Modify this to match your main branch name
+      - master  # Modify this to match your main branch name
 
 jobs:
   create_release:
