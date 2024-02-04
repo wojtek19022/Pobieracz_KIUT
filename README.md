@@ -2,10 +2,10 @@
 Wtyczka służy do pobierania za pomocą zapytania GetMap fragmentów sieci uzbrojenia terenu. Możliwe są braki możliwości pobrania danych z powodu blokad serwerowych.
 
 Kroki przed uruchomieniem narzędzia:
-- Przed uruchomieniem narzędzia, należy z poziomu command window przejść do ścieżki roboczej:\n
+1. Przed uruchomieniem narzędzia, należy z poziomu command window przejść do ścieżki roboczej:\n
 ```cd sciezka\robocza```
 
-- Będąc w lokalizacji ścieżki roboczej, należy wpisać poniższą komendę w celu instalacji wymaganych bibliotek:\n
+2. Będąc w lokalizacji ścieżki roboczej, należy wpisać poniższą komendę w celu instalacji wymaganych bibliotek:\n
 ```pip install -r requirements.txt```
 
 ## Aby pobrać fragmenty sieci uzbrojenia terenu należu:
