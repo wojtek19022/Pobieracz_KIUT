@@ -16,7 +16,7 @@ jobs:
         run: |
           echo "done!"
 
-      - uses: "actions/Tagged Release@latest"
+      - uses: "actions/tagged-release@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
