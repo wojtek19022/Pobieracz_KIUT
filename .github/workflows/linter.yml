@@ -26,8 +26,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      # - name: super linter
-      #   uses: github/super-linter@latest
+      - name: super linter
+        uses: github/super-linter@latest
         env:
-          working-directory: /home/runner/work/Pobieracz_KIUT
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
