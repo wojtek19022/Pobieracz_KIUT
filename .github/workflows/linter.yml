@@ -7,7 +7,7 @@ on:
 jobs:
   linter:
     name: linter
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     permissions:
       contents: read
@@ -21,7 +21,7 @@ jobs:
           python-version: '3.11'
           cache: 'pip' # caching pip dependencies
       - run: pip install -r requirements.txt
-        working-directory: ./Pobieracz_KIUT
+        # working-directory: ./Pobieracz_KIUT
       # - name: checkout repository
       #   uses: actions/checkout@v4
         
