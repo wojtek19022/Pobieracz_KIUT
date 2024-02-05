@@ -1,15 +1,14 @@
-from time import sleep
-import fiona
-from shapely.geometry import shape
 import os
+import fiona
+from time import sleep
 from requests.exceptions import HTTPError, RequestException
+from shapely.geometry import shape
 
-from . import download_data, redownload
+from .download_data import data_downloading
+from .redownload import download_again
 
 
-def save_link(
-        txt_file, county_code, layers, desktop, networks, new_networks, redirection, output
-):
+def save_link(txt_file, county_code, layers, desktop, networks, new_networks, redirection, output):
     coords = {}
 
     with open(txt_file, "w+") as file_links:
@@ -47,7 +46,7 @@ def save_link(
                     for network in networks:
                         try:
                             sleep(2)
-                            redirection = download_data.data_downloading(
+                            redirection = data_downloading(
                                 n=n,
                                 i=network,
                                 extent_total=extent_total,
@@ -56,7 +55,7 @@ def save_link(
                                 county_code=county_code,
                                 output=output,
                             )
-
+                            print(redirection)
                         except fiona.errors.DriverError or fiona._err.CPLE_OpenFailedError as e:
                             print(f"Zły format: {e}")
 
@@ -85,7 +84,7 @@ def save_link(
                 else:
                     name_network = new_networks[0]
                 sleep(2)
-                redownload.download_again(
+                download_again(
                     county_code=county_code, output=output, value=row, name=name_network
                 )
         file_links.close()

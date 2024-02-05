@@ -1,11 +1,7 @@
 from requests import request
 
-from . import save_data
 
-
-def data_downloading(
-        n, i, extent_total, file_links, redirection, county_code, output
-):
+def data_downloading(n, i, extent_total, file_links, redirection, county_code, output):
     parameters = {
         "LAYERS": i,
         "REQUEST": "GetMap",
@@ -38,6 +34,7 @@ def data_downloading(
         redirection = False
         print("Pobrano: ", response.url)
 
+    from . import save_data
     if response.status_code == 200 and response.url.count("png") == 0:
         save_data.data_saving(
             response_content=response.content, output=output, n=n, i=i
