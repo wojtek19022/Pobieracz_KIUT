@@ -1,6 +1,7 @@
-import os
 import ctypes
-from modules import write_links, files_searcher
+import os
+from modules.write_links import save_link
+from modules.files_searcher import lookup_files
 
 # TODO uodpornienie kursora w sytuacji jeżeli istnieje plik
 # TODO uproszczenie logiki działania programu (zrobienie podziału na siatkę po zakresie na wejściu)
@@ -43,9 +44,9 @@ class KIUT_dane:
     def run(self):
         """Funkcja uruchamia wszsytkie podległe procesy do przetworzenia danych"""
         if os.path.exists(self.output):
-            files_searcher.lookup_files(desktop=self.desktop, layers=self.layers)
+            lookup_files(desktop=self.desktop, layers=self.layers)
             self.txt_file = os.path.join(self.output, "links_kiut.txt")
-            write_links.save_link(
+            save_link(
                 txt_file=self.txt_file,
                 county_code=self.county_code,
                 layers=self.layers,

@@ -1,7 +1,7 @@
-from time import sleep
 import webbrowser
+from time import sleep
 
-from . import move_cursor
+from .move_cursor import move_cursor_on_screen
 
 
 def download_again(county_code, output, value, name):
@@ -13,7 +13,7 @@ def download_again(county_code, output, value, name):
         webbrowser.open(url=value.split(" ")[1].strip().replace("png", "tiff"))
     # Na przyszłość: [i for i in range(5)][0]
     sleep(3)
-    move_cursor.move_cursor_on_screen(
+    move_cursor_on_screen(
         county_code=county_code, output=output, value=value.split(' ')[0], name=name
     )
     sleep(1)
