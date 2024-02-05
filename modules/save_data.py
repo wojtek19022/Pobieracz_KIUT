@@ -1,6 +1,7 @@
 import os
 
-def data_saving(response_content,output,n, i):
+
+def data_saving(response_content, output, n, i):
     # Save the response content as a GeoTIFF file
     nazwa_pliku = f"obszar_{n}_{i}.tif"
 
