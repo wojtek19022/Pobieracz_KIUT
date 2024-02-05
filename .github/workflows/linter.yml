@@ -21,10 +21,11 @@ jobs:
           python-version: '3.11'
           cache: 'pip' # caching pip dependencies
       - run: pip install -r requirements.txt
-      - name: checkout repository
-        uses: actions/checkout@v4
+        working-directory: ./Pobieracz_KIUT
+      # - name: checkout repository
+      #   uses: actions/checkout@v4
         
-      - name: super linter
-        uses: github/super-linter@latest
+      # - name: super linter
+      #   uses: github/super-linter@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
