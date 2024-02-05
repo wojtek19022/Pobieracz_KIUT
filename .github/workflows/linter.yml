@@ -2,9 +2,7 @@
 name: linter
 
 on:
-  push:
-    branches:
-      - dev
+  push
 
 jobs:
   linter:
