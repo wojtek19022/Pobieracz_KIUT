@@ -8,7 +8,9 @@ from .download_data import data_downloading
 from .redownload import download_again
 
 
-def save_link(txt_file, county_code, layers, desktop, networks, new_networks, redirection, output):
+def save_link(
+        txt_file, county_code, layers, desktop, networks, new_networks, redirection, output
+):
     coords = {}
 
     with open(txt_file, "w+") as file_links:
@@ -46,7 +48,7 @@ def save_link(txt_file, county_code, layers, desktop, networks, new_networks, re
                     for network in networks:
                         try:
                             sleep(2)
-                            redirection = data_downloading(
+                            redirection,response = data_downloading(
                                 n=n,
                                 i=network,
                                 extent_total=extent_total,
@@ -55,14 +57,15 @@ def save_link(txt_file, county_code, layers, desktop, networks, new_networks, re
                                 county_code=county_code,
                                 output=output,
                             )
-                            print(redirection)
+                            print(response)
                         except fiona.errors.DriverError or fiona._err.CPLE_OpenFailedError as e:
                             print(f"Zły format: {e}")
 
                         except RequestException as e:
                             file_links.write(
                                 str(
-                                    f"{str(n)} https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaUzbrojeniaTerenu/{county_code}?LAYERS={i}&REQUEST=GetMap&SERVICE=WMS&FORMAT=image/tiff&STYLES=,,,&HEIGHT=2160&VERSION=1.1.1&SRS=EPSG:2180&WIDTH=3840&BBOX={extent_total}&TRANSPARENT=TRUE&EXCEPTIONS=application/vnd.ogc.se_xml") + "\n"
+                                    f"{str(n)} {response.url.replace('png','tiff')}"
+                                    ) + "\n"
                                 )
                             print(f"Request failed: {e}")
 
