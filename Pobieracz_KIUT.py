@@ -1,6 +1,6 @@
 import os
 import ctypes
-from modules import write_linki, files_searcher
+from modules import write_links, files_searcher
 
 # TODO uodpornienie kursora w sytuacji jeżeli istnieje plik
 # TODO uproszczenie logiki działania programu (zrobienie podziału na siatkę po zakresie na wejściu)
@@ -8,79 +8,79 @@ from modules import write_linki, files_searcher
 """
     Tytuł: Pobieracz KIUT®
     Autor: Wojciech Sołyga
-    Wersja: 0.2.1
+    Wersja: 0.2.2
     Data publikacji: 26.11.2023 r.
 """
 
 
 class KIUT_dane:
     def __init__(self):
-        self.Desktop = None
-        self.kod_powiatu = None
-        self.Output = None
+        self.desktop = None
+        self.county_code = None
+        self.output = None
         i = None
         n = None
-        self.polecenie = None
-        self.czy_przekierowanie = False
+        self.order = None
+        self.if_redirection = False
         self.workspace = os.getcwd()
         self.layers = []
-        self.sieci = [
+        self.networks = [
             "przewod_wodociagowy",
             "przewod_kanalizacyjny",
             "przewod_gazowy",
             "przewod_elektroenergetyczny",
             "przewod_telekomunikacyjny",
         ]
-        self.new_sieci = [
+        self.new_networks = [
             "siec_wodociagowa",
             "siec_kanalizacyjna",
             "siec_gazowa",
             "siec_elektroenergetyczna",
             "siec_telekomunikacja",
         ]
-        self.start_pobranie()
+        self.download_start()
 
     def run(self):
         """Funkcja uruchamia wszsytkie podległe procesy do przetworzenia danych"""
-        if os.path.exists(self.Output):
-            files_searcher.przeszukanie_pliki(desktop=self.Desktop, layers=self.layers)
-            self.plik_txt = os.path.join(self.Output, "linki_kiut.txt")
-            write_linki.zapisz_linki(
-                plik_txt=self.plik_txt,
-                kod_powiatu=self.kod_powiatu,
+        if os.path.exists(self.output):
+            files_searcher.lookup_files(desktop=self.desktop, layers=self.layers)
+            self.txt_file = os.path.join(self.output, "links_kiut.txt")
+            write_links.save_link(
+                txt_file=self.txt_file,
+                county_code=self.county_code,
                 layers=self.layers,
-                desktop=self.Desktop,
-                sieci=self.sieci,
-                new_sieci=self.new_sieci,
-                przekierowanie=self.czy_przekierowanie,
-                output=self.Output,
+                desktop=self.desktop,
+                networks=self.networks,
+                new_networks=self.new_networks,
+                redirection=self.if_redirection,
+                output=self.output,
             )
 
     def success_message(self, title, text, style):
         """Funkcja zwraca komentarz o sukcesie zakończenia procesu"""
         return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-    def start_pobranie(self):
+    def download_start(self):
         """
         Rozpoczęcie działania programu
         """
         while (
-            type(self.Desktop) != str()
-            or type(self.kod_powiatu) != int()
-            or type(self.Output) != str()
+            type(self.desktop) != str()
+            or type(self.county_code) != int()
+            or type(self.output) != str()
         ):
 
             try:
-                self.Desktop = str(
+                self.desktop = str(
                     input(
                         "-----------------------------------------------------"
                         "\nPodaj ścieżkę do folderu w którym są zapisane zakresy do opracowania \n"
                         "[1 zakres, to jedno zestawienie rastrów. Im mniejszy rozmiar kafla w metrach, tym dokładniejsze opracowanie!]: "
                     )
                 )
-                if os.path.exists(self.Desktop):
-                    self.kod_powiatu = int(input("Wprowadź kod miejscowości: "))
-                    self.Output = str(
+                if os.path.exists(self.desktop):
+                    self.county_code = int(input("Wprowadź kod miejscowości: "))
+                    self.output = str(
                         input(
                             "Podaj ścieżkę do folderu w którym zostaną zapisane wynikowe rastry po przetworzeniu: "
                         )
@@ -104,18 +104,18 @@ class KIUT_dane:
         """
         Funkcja resetująca wszystkie zmienne do domyślnych wartości
         """
-        self.Desktop = None
-        self.kod_powiatu = None
-        self.Output = None
-        self.polecenie = None
-        self.czy_przekierowanie = False
+        self.desktop = None
+        self.county_code = None
+        self.output = None
+        self.order = None
+        self.if_redirection = False
         self.layers.clear()
 
 
 try:
-    kiut_dane_instance = KIUT_dane()
+    kiut_data_instance = KIUT_dane()
     # inicjalizacja klasy
-    kiut_dane_instance.start_pobranie()
+    kiut_data_instance.download_start()
 
 except KeyboardInterrupt:
     # Przekazanie tu jeżeli zabijemy proces programu

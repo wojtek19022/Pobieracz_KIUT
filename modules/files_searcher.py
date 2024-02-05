@@ -1,8 +1,9 @@
 import os
 
-def przeszukanie_pliki(desktop,layers):
+
+def lookup_files(desktop, layers):
     for i in os.listdir(desktop):
-        if 'id' in i.split(".")[0]:
+        if "id" in i.split(".")[0]:
             layer = os.path.join(desktop, i)
             layers.append(layer)
         else:

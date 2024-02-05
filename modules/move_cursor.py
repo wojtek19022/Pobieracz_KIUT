@@ -1,7 +1,8 @@
 import pyautogui
 
-def poruszanie_ekran(kod_powiatu,output,value,name):
-    if kod_powiatu == 1465:  # Jeżeli mają być dane pobrane z Warszawy
+
+def move_cursor_on_screen(county_code, output, value, name):
+    if county_code == 1465:  # Jeżeli mają być dane pobrane z Warszawy
         pyautogui.moveTo(1581, 676, duration=1)
         pyautogui.rightClick()
         pyautogui.moveTo(1585, 713, duration=1)
