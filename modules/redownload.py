@@ -14,6 +14,6 @@ def download_again(county_code, output, value, name):
     # Na przyszłość: [i for i in range(5)][0]
     sleep(3)
     move_cursor_on_screen(
-        county_code=county_code, output=output, value=value.split(' ')[0], name=name
+        county_code=county_code, output=output, value=value.split(" ")[0], name=name
     )
     sleep(1)

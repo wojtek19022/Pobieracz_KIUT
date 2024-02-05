@@ -1,5 +1,5 @@
 from requests import request
-
+from .save_data import data_saving
 
 def data_downloading(n, i, extent_total, file_links, redirection, county_code, output):
     parameters = {
@@ -12,8 +12,8 @@ def data_downloading(n, i, extent_total, file_links, redirection, county_code, o
         "SRS": "EPSG:2180",
         "WIDTH": 3840,
         "BBOX": extent_total,
-        "TRANSPARENT": 'TRUE',
-        "EXCEPTIONS": 'application/vnd.ogc.se_xml',
+        "TRANSPARENT": "TRUE",
+        "EXCEPTIONS": "application/vnd.ogc.se_xml",
     }
 
     main_link = f"https://integracja01.gugik.gov.pl/cgi-bin/KrajowaIntegracjaUzbrojeniaTerenu/{county_code}"
@@ -34,9 +34,8 @@ def data_downloading(n, i, extent_total, file_links, redirection, county_code, o
         redirection = False
         print("Pobrano: ", response.url)
 
-    from . import save_data
     if response.status_code == 200 and response.url.count("png") == 0:
-        save_data.data_saving(
+        data_saving(
             response_content=response.content, output=output, n=n, i=i
         )
     if (
@@ -44,7 +43,7 @@ def data_downloading(n, i, extent_total, file_links, redirection, county_code, o
         and response.url.count("png") == 1
         and county_code == 1465
     ):
-        save_data.data_saving(
+        data_saving(
             response_content=response.content, output=output, n=n, i=i
         )
     elif response.url.count("png") > 0:
@@ -52,4 +51,4 @@ def data_downloading(n, i, extent_total, file_links, redirection, county_code, o
     else:
         print(f"Failed to fetch image. Status code: {response.status_code}")
 
-    return redirection
+    return redirection,response
