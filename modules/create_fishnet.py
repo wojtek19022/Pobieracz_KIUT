@@ -1,7 +1,6 @@
 import geopandas as gpd
 from shapely import geometry
 
-
 # Read the shapefile
 gdf = gpd.read_file("abbottstown_pa_union.shp")
 
