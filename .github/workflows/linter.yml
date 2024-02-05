@@ -1,0 +1,27 @@
+---
+name: linter
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  linter:
+    name: linter
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        
+      - name: super linter
+        uses: github/super-linter@latest
+        env:
+          DEFAULT_BRANCH: master
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
